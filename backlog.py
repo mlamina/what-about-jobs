@@ -7,6 +7,19 @@ class Backlog:
         Initializes the Backlog with an empty list of items.
         """
         self.items = []
+        self._populate_backlog_from_files()
+
+    def _populate_backlog_from_files(self):
+        """
+        Populates the backlog items from files in the backlog directory.
+        """
+        import glob
+        backlog_files = glob.glob('backlog/*.md')
+        for file_path in backlog_files:
+            priority, question_slug = file_path.split('/')[-1].split('-')
+            with open(file_path, 'r') as file:
+                question = file.read().strip()
+            self.items.append((int(priority), question_slug, question))
 
     def add_item(self, item):
         """
@@ -55,4 +68,4 @@ class Backlog:
             return None
         highest_priority_item = min(self.items, key=lambda item: item[0])
         self.items.remove(highest_priority_item)
-        return highest_priority_item[1]
+        return highest_priority_item[2]

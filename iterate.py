@@ -20,14 +20,10 @@ def main() -> None:
     backlog = Backlog()
     
     # Pull a question from the backlog
-    if backlog.items:
-        question = backlog.items[0]
-        
+    question = backlog.pull_next_question()
+    if question:
         # Execute AI operations with the question
         execute_ai_operations(question)
-        
-        # Remove the question from the backlog after processing
-        backlog.remove_item(question)
     
     # Analyze the results from the previous iteration
     analyze_previous_results()

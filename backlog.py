@@ -44,3 +44,15 @@ class Backlog:
             index = self.items.index(item)
             self.items.remove(item)
             self.items.insert(new_priority, item)
+
+    def pull_next_question(self):
+        """
+        Finds and returns the item with the highest priority.
+
+        :return: The item with the highest priority.
+        """
+        if not self.items:
+            return None
+        highest_priority_item = min(self.items, key=lambda item: item[0])
+        self.items.remove(highest_priority_item)
+        return highest_priority_item[1]

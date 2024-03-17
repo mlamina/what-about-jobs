@@ -1,0 +1,1 @@
+What do we want the future of work to look like? This question prompts us to consider the desired outcomes and implications of AI replacing human labor, including the impact on job roles, industries, and the overall workforce.

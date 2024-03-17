@@ -9,14 +9,25 @@ from ai_operations import execute_ai_operations
 from analysis import analyze_previous_results
 from self_improvement import apply_self_improvement
 from documentation import document_iteration
+from backlog import Backlog
 
 def main() -> None:
     """Main entry point for the iteration process."""
     # Initialize the iteration environment
     initialize_iteration_environment()
     
-    # Execute AI operations
-    execute_ai_operations()
+    # Initialize the Backlog
+    backlog = Backlog()
+    
+    # Pull a question from the backlog
+    if backlog.items:
+        question = backlog.items[0]
+        
+        # Execute AI operations with the question
+        execute_ai_operations(question)
+        
+        # Remove the question from the backlog after processing
+        backlog.remove_item(question)
     
     # Analyze the results from the previous iteration
     analyze_previous_results()

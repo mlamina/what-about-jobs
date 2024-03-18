@@ -16,10 +16,12 @@ class Backlog:
         import glob
         backlog_files = glob.glob('backlog/*.md')
         for file_path in backlog_files:
-            priority, question_slug = file_path.split('/')[-1].split('-')
-            with open(file_path, 'r') as file:
-                question = file.read().strip()
-            self.items.append((int(priority), question_slug, question))
+            parts = file_path.split('/')[-1].split('-', 1)
+            if len(parts) == 2:
+                priority, question_slug = parts
+                with open(file_path, 'r') as file:
+                    question = file.read().strip()
+                self.items.append((int(priority), question_slug, question))
 
     def add_item(self, item):
         """

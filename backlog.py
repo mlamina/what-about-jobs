@@ -1,3 +1,6 @@
+import glob
+import os
+
 class Backlog:
     """
     A class to manage backlog items with functionalities to add, remove, list, and reprioritize items.
@@ -13,7 +16,6 @@ class Backlog:
         """
         Populates the backlog items from files in the backlog directory.
         """
-        import glob
         backlog_files = glob.glob('backlog/*.md')
         for file_path in backlog_files:
             parts = file_path.split('/')[-1].split('-', 1)
@@ -23,42 +25,43 @@ class Backlog:
                     question = file.read().strip()
                 self.items.append((int(priority), question_slug, question))
 
-    def add_item(self, item):
+    def add_item(self, priority, question_slug, question):
         """
-        Adds an item to the backlog.
+        Adds an item to the backlog by creating a new file.
 
-        :param item: The item to be added to the backlog.
+        :param priority: The priority of the item.
+        :param question_slug: The slug for the question.
+        :param question: The question text.
         """
-        self.items.append(item)
+        file_name = f'backlog/{priority}-{question_slug}.md'
+        with open(file_name, 'w') as file:
+            file.write(question)
+        self._populate_backlog_from_files()
 
-    def remove_item(self, item):
+    def remove_item(self, question_slug):
         """
-        Removes an item from the backlog if it exists.
+        Removes an item from the backlog by deleting its file.
 
-        :param item: The item to be removed from the backlog.
+        :param question_slug: The slug of the question to be removed.
         """
-        if item in self.items:
-            self.items.remove(item)
+        for priority, slug, question in self.items:
+            if slug == question_slug:
+                os.remove(f'backlog/{priority}-{slug}.md')
+                break
+        self._populate_backlog_from_files()
 
-    def list_items(self):
+    def reprioritize_item(self, question_slug, new_priority):
         """
-        Lists all items in the backlog.
+        Reprioritizes an item in the backlog by renaming its file.
 
-        :return: A list of all items in the backlog.
-        """
-        return self.items
-
-    def reprioritize_item(self, item, new_priority):
-        """
-        Reprioritizes an item in the backlog.
-
-        :param item: The item to be reprioritized.
+        :param question_slug: The slug of the question to be reprioritized.
         :param new_priority: The new priority index for the item.
         """
-        if item in self.items:
-            index = self.items.index(item)
-            self.items.remove(item)
-            self.items.insert(new_priority, item)
+        for priority, slug, question in self.items:
+            if slug == question_slug:
+                os.rename(f'backlog/{priority}-{slug}.md', f'backlog/{new_priority}-{slug}.md')
+                break
+        self._populate_backlog_from_files()
 
     def pull_next_question(self):
         """

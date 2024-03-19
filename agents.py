@@ -6,6 +6,7 @@ planning and executing research, and writing findings into Markdown files.
 """
 
 from langchain.agents import Agent
+from backlog import Backlog
 
 # Define the roles for our agents
 ROLES = ['BacklogPuller', 'ResearchPlanner', 'ResearchExecutor', 'MarkdownWriter']
@@ -15,10 +16,11 @@ class BacklogPuller(Agent):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.role = 'BacklogPuller'
+        self.backlog = Backlog()
 
     def pull_question(self):
         # Implementation for pulling a question from the backlog
-        pass
+        return self.backlog.pull_next_question()
 
 
 class ResearchPlanner(Agent):

@@ -28,9 +28,9 @@ class ResearchPlanner(Agent):
         super().__init__(*args, **kwargs)
         self.role = 'ResearchPlanner'
 
-    def plan_research(self):
-        # Implementation for creating a research plan
-        pass
+    def plan_research(self, question):
+        # Implementation for creating a research plan based on a question
+        print(f"Planning research for: {question}")
 
 
 class ResearchExecutor(Agent):
@@ -38,9 +38,9 @@ class ResearchExecutor(Agent):
         super().__init__(*args, **kwargs)
         self.role = 'ResearchExecutor'
 
-    def execute_research(self):
-        # Implementation for executing the research
-        pass
+    def execute_research(self, plan):
+        # Implementation for executing the research based on a plan
+        print(f"Executing research plan: {plan}")
 
 
 class MarkdownWriter(Agent):
@@ -48,9 +48,9 @@ class MarkdownWriter(Agent):
         super().__init__(*args, **kwargs)
         self.role = 'MarkdownWriter'
 
-    def write_findings(self):
+    def write_findings(self, findings):
         # Implementation for writing findings into Markdown files
-        pass
+        print(f"Writing findings: {findings}")
 
 # Initialize agents
 agents = {

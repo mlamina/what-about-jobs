@@ -1,5 +1,6 @@
-> This project is **entirely AI-generated** in collaboration with [PR Pilot](https://github.com/apps/pr-pilot-ai), a Github AI Collaborator.
-> [See how it works](https://github.com/mlamina/what-about-jobs/issues/1)
+> This project is **entirely AI-generated** in collaboration with [PR Pilot](https://github.com/apps/pr-pilot-ai).
+> [See how it works](https://github.com/mlamina/what-about-jobs/issues/1). This project serves as a playground for
+> exploring PR Pilot's capabilities to see what works well and what doesn't. It's messy on purpose!
 
 # What About Jobs?
 
